@@ -1,0 +1,14 @@
+<div class="card h-100 small-card" appShadow>
+  <img [src]="prouduct?.img" class="card-img-top">
+  <div class="card-body">
+    <h6 class="card-title">{{ prouduct?.name }}</h6>
+    <p class="card-text">Price: {{ prouduct?.price }}</p>
+    <p class="card-text">Quantity: {{ prouduct?.quantity }}</p>
+
+    <!-- زرار التفاصيل باستخدام routerLink -->
+    <a class="btn btn-info w-100 mt-2" 
+       [routerLink]="['/products', prouduct?.id]">
+      Details
+    </a>
+  </div>
+</div>

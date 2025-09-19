@@ -1,0 +1,54 @@
+<div class="row mb-3">
+  <div class="col-12 col-md-6">
+    <input 
+      type="text" 
+      placeholder="Search by name" 
+      [(ngModel)]="searchT"
+      class="form-control">
+  </div>
+
+  <div class="col-12 col-md-6">
+    <select 
+      class="form-select" 
+      [(ngModel)]="selectedCategoryId">
+      <option value="0">All Categories</option>
+      @for (cat of categories; track cat.id) {
+        <option value="{{ cat.id }}">{{ cat.name }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  @for (product of filteredProductsList; track product.id) {
+    <div class="col-12 col-md-3 mb-3">
+      <div class="card h-100 small-card "appShadow  >
+        <img [src]="product.img" class="card-img-top">
+        <div class="card-body">
+
+          <h6 class="card-title">{{ product.name }}</h6>
+          <p class="card-text">Date: {{ currentDate | date }}</p>
+          <p class="card-text">ID: {{ product.id|truncate}} </p>
+
+          <p class="card-text">Price: {{ product.price | currency}} </p>
+          <p class="card-text">Quantity: {{ product.quantity }}</p>
+          <p class="card-text">Category: {{ getCategoryName(product.categoryID) }}</p>
+
+          @switch (product.quantity) {
+            @case (0) { <p class="text-danger">Out of Stock</p> }
+            @case (1) { <p class="text-warning">Last One Item</p> }
+            @case (2) { <p class="text-warning">Last Two Items</p> }
+            @default { <p class="text-success">In Stock ({{product.quantity}})</p> }
+          }
+
+          <button class="btn btn-primary w-100" [disabled]="product.quantity == 0" (click)="buyProduct(product)">
+            Buy
+          </button>
+          <button class="btn btn-info w-100 mt-2" (click)="showDetails(product)">
+            Details
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

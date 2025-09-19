@@ -1,0 +1,14 @@
+<div class="mb-3">
+  <input type="text" class="form-control" placeholder=" Search ..."
+         [(ngModel)]="searchText">
+</div>
+
+<div class="row">
+  @for(productP of products; track productP.id) {
+    @if(productP.name.toLowerCase().includes(searchText.toLowerCase())) { 
+      <div class="col-4">
+        <app-productcard [prouduct]="productP"></app-productcard>
+      </div>
+    }
+  }
+</div>
