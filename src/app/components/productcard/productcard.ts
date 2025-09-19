@@ -2,10 +2,8 @@ import { Component,Input,Output,EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IProduct } from '../../models/iproduct';
-import { Shadow } from '../../directive/shadow';
-import { TruncatePipe } from '../../pipes/truncate-pipe';
-import { DatePipe,CurrencyPipe } from '@angular/common';
-import { RouterModule } from '@angular/router'; // 👈 لازم
+import { RouterModule } from '@angular/router';
+
 
 
 @Component({
@@ -29,7 +27,7 @@ export class Productcard {
 
   showDetails() {
   if (this.prouduct) {
-    this.Details.emit(this.prouduct.id); // 🔹 نبعت id بس
+    this.Details.emit(this.prouduct.id); 
   }
 }
   

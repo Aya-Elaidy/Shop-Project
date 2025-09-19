@@ -1,14 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { ProductService } from '../service/product-service';
 import { IProduct } from '../../models/iproduct';
+import { RouterModule } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   templateUrl: './product-details.html',
-  styleUrls: ['./product-details.css']
+  styleUrls: ['./product-details.css'],
+  imports:[RouterModule]
 })
 export class ProductDetails implements OnInit {
   product?: IProduct;

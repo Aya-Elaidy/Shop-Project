@@ -26,9 +26,10 @@ export class Products {
   ];
 
   productList: IProduct[] = [
-    { id: 1456545646234, name: 'Laptop', quantity: 5, price: 15000, img: 'images/lap.jpg', categoryID: 1 },
-    { id: 256645645, name: 'T-shirt', quantity: 20, price: 300, img: 'images/shirt.jpg', categoryID: 2 },
-   
+    { id: 1445456656, name: 'Laptop', quantity: 5, price: 15000, img: 'images/lap.jpg', categoryID: 1 },
+    { id: 244556, name: 'T-shirt', quantity: 20, price: 300, img: 'images/shirt.jpg', categoryID: 2 },
+    { id: 3, name: 'Microwave', quantity: 7, price: 2500, img: 'images/micro.jpg', categoryID: 3 },
+    { id: 4, name: 'Novel', quantity: 0, price: 120, img: 'images/novel.jpg', categoryID: 4 }
   ];
   
 get filteredProductsList(): IProduct[] {
