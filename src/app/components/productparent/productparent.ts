@@ -20,8 +20,16 @@ export class Productparent implements OnInit {
   ngOnInit(): void {
     this.getAllProduct();
   }
-
   getAllProduct() {
-    this.products = this.productsService.getAllProducts();
-  }
+  this.productsService.getAllProducts().subscribe({
+    next: (res: any) => {
+      this.products = res.products;  
+    },
+    error: (err) => {
+      console.error('Error ', err);
+    }
+  });
+}
+
+
 }

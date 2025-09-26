@@ -1,41 +1,48 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray,Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { createLoginForm } from '../../forms/login';
+import { Auth } from '../service/auth';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.css',
+  styleUrls: ['./login.css'],
 })
 export class Login {
-  submitData:any=null;
-loginForm: FormGroup;
+  error: string = '';
+  loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: Auth,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.loginForm = createLoginForm(this.fb);
   }
 
- 
-
-
-
-
- onSubmit() {
-  if (this.loginForm.valid) {
-    this.submitData = this.loginForm.value;
-
-    this.loginForm.reset();
-
-
+  login() {
+    const { username, password } = this.loginForm.value;
+    this.auth.login(username, password).subscribe({
+      next: () => {
+        this.toastr.success('Login Successful ', 'Success');
+        this.router.navigate(['/product']); 
+      },
+      error: (err) => {
+        this.error = err.error.message || 'Login failed';
+        this.toastr.error(this.error, 'Error');
+      },
+    });
   }
-}
-
 
   resetForm() {
-this.loginForm.reset();
+    this.loginForm.reset();
+    this.toastr.info('Form Reset');
   }
 }

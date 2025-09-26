@@ -7,6 +7,8 @@ import { NotFound } from './components/not-found/not-found';
 import { ProductDetails } from './components/product-details/product-details';
 import { Register } from './components/register/register';
 import { Login } from './components/login/login';
+import { authGuard } from './guards/auth-guard';
+import { Search } from './components/search/search';
 export const routes: Routes = [
 
 { path:'', redirectTo:'home',pathMatch:'full'},
@@ -14,7 +16,7 @@ export const routes: Routes = [
         path:'home',
         component:Home
     },
-    { path: 'products/:id', component: ProductDetails },
+  { path: 'details/:id', component: ProductDetails },
 
      {
         path:'about',
@@ -26,21 +28,29 @@ export const routes: Routes = [
     },  {
         path:'product',
         component:Productparent
+        
+
     },
      {
         path:'register',
         component:Register,
-        title:'Register page'
+        title:'Register page',
+        canActivate:[authGuard]
+        
     },
      {
         path:'login',
         component:Login,
-        title:'Login page'
+        title:'Login page',
+        canActivate:[authGuard]
+
     },
+    { path: 'search-products', component: Search },
     {
     path:'**',
         component:NotFound,
     },
+
     
     
 

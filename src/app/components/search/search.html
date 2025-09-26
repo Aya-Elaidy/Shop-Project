@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <h2>Search Products</h2>
+  
+  <!-- input  -->
+  <div class="input-group mb-3">
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Enter keyword..." 
+      [(ngModel)]="searchText"
+    >
+    <button class="btn btn-primary" (click)="search()">Search</button>
+  </div>
+
+
+
+
+  <!-- results -->
+  <div class="row">
+    @for (product of products; track product.id) {
+      <div class="col-md-4 mb-3">
+        <div class="card h-100">
+          <img [src]="product.thumbnail" class="card-img-top">
+        <div class="card-body text-center">
+    <h5 class="card-title">{{ product?.title }}</h5>
+    <p class="card-text">Price: {{ product?.price | currency }}</p>
+    <p class="card-text">Category: {{ product?.category }}</p>
+    <p class="card-text">Stock: {{ product?.stock }}</p>
+    <a routerLink="/product" class="btn btn-primary mt-3">Go Back Products</a>
+  </div>
+          
+        </div>
+      </div>
+    } @empty {
+      <p class="text-danger">No products found.</p>
+    }
+  </div>
+</div>

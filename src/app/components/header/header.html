@@ -1,14 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/home"routerLinkActive="active"> Shop</a>
-        <a class="navbar-brand" routerLink="/home" routerLinkActive="active"> Home</a>
-    <a class="nav-link text-white" routerLink="/about" routerLinkActive="active"> About</a>
-    <a class="nav-link text-white" routerLink="/contatct" routerLinkActive="active"> Contact</a>
-    <a class="nav-link text-white" routerLink="/product" routerLinkActive="active" >products</a>
-        <a class="nav-link text-white" routerLink="/register" routerLinkActive="active" >Register</a>
-                <a class="nav-link text-white" routerLink="/login" routerLinkActive="active" >Login</a>
 
+    <a class="navbar-brand" routerLink="/home" routerLinkActive="active">Home</a>
 
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/about" routerLinkActive="active">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/contatct" routerLinkActive="active">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/product" routerLinkActive="active">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/search-products" routerLinkActive="active">Search</a>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        @if (authservice.isLoggedIN()) {
+          <button
+            class="btn btn-secondary ms-2"
+            routerLink="/login"
+            routerLinkActive="active"
+            (click)="logout()"
+          >
+            LogOut
+          </button>
+        } @else {
+          <button
+            class="btn btn-secondary ms-2"
+            routerLink="/register"
+            routerLinkActive="active"
+          >
+            Register
+          </button>
+          <button
+            class="btn btn-secondary ms-2"
+            routerLink="/login"
+            routerLinkActive="active"
+          >
+            Login
+          </button>
+        }
+      </div>
+    </div>
   </div>
 </nav>

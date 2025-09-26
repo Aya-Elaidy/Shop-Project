@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../service/product-service';
 import { IProduct } from '../../models/iproduct';
 import { RouterModule } from '@angular/router';
+import { CurrencyPipe } from '@angular/common';
 
 
 
@@ -11,7 +12,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './product-details.html',
   styleUrls: ['./product-details.css'],
-  imports:[RouterModule]
+  imports:[RouterModule,CurrencyPipe]
 })
 export class ProductDetails implements OnInit {
   product?: IProduct;
@@ -20,14 +21,21 @@ export class ProductDetails implements OnInit {
   private route: ActivatedRoute,
   private productService: ProductService
 ) {}
-
 ngOnInit(): void {
   const idStr = this.route.snapshot.paramMap.get('id');
   const id = idStr ? Number(idStr) : NaN;
 
   if (!isNaN(id)) {
-    this.product = this.productService.getProductByID(id);
+    this.productService.getProductByID(id).subscribe({
+      next: (res) => {
+        this.product = res;   
+      },
+      error: (err) => {
+        console.error('Error loading product details:', err);
+      }
+    });
   }
 }
+
 
 }
